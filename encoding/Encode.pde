@@ -75,6 +75,7 @@ class Encode
         }        
       } 
     }
+    c.save("encoded.png");
     return c;
   }
 }
