@@ -36,11 +36,11 @@ class Encode
             {
               if(r == 0)
               {
-                c.set(x, y, color(r, g, b)); // red value increment by 1 if equal to 0
+                c.set(x, y, color(r+1, g, b)); // red value increment by 1 if equal to 0
               }
               else
               {
-                 c.set(x, y, color(r, g, b)); // red value decrement by 1 if smaller than 255
+                 c.set(x, y, color(r-1, g, b)); // red value decrement by 1 if smaller than 255
               }
             }
             else
@@ -56,11 +56,11 @@ class Encode
             {
               if(r == 255)
               {
-                c.set(x, y, color(r, g, b)); // red value increment by 1 if equal to 0
+                c.set(x, y, color(r-1, g, b)); // red value decrement by 1 if equal to 0
               }
               else
               {
-                 c.set(x, y, color(r, g, b)); // red value decrement by 1 if smaller than 255
+                 c.set(x, y, color(r+1, g, b)); // red value increment by 1 if smaller than 255
               }
             }
             else

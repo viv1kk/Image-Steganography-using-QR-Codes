@@ -1,17 +1,20 @@
 // using rgb values to display an image
 BW_hidden q;
-Convert c;
+Encode e;
+Decode d;
 
 PImage dog;
 PImage qr;
 PImage cqr;
-PImage cdog;
+PImage edog;
+
+PImage ddog;
 
 void setup()
 {
   dog = loadImage("../doggo.jpg");
   qr = loadImage("../SQR.png");
-  size(640,635);
+  size(1325,635);
   
   // converting the qr image to pure black and white
   q = new BW_hidden(qr);
@@ -19,14 +22,16 @@ void setup()
   
   //converting the dog image to hide the qr image
   
-  c = new Encode(dog, cqr);
-  cdog = c.encode();
+  e = new Encode(dog, cqr);
+  edog = e.encode();
   
+  d = new Decode(edog, dog.width,dog.height);   // size of the image is also needed to be specified to search for qr
+  ddog = d.decode();
 }
 
 void draw()
 {
   background(0);
-  //image(dog,0,0);
-  image(cdog,0,0);
+  image(edog,670,0);
+  image(ddog,0,0);
 }
