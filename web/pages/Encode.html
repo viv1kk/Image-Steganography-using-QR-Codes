@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/enc.css">
+</head>
+<body>
+    <div class="container-lg">
+        <form>
+            <!-- <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">Hide Text</label>
+            </div> -->
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Upload the Base Image</label>
+                <input class="form-control" type="file" id="baseUpload" accept="image/*"  onchange="loadbaseimage(event)">
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Upload the QR image</label>
+                <input class="form-control" type="file" id="qrUpload" accept="image/*"  onchange="loadqrimage(event)">
+            </div>
+        </form>
+    </div>
+    <div class = 'disp-images'>
+        <div class="container-lg  d-flex flex-row justify-content-around image-div">
+            <div class="p-2 bd-highlight">
+                <h4>Base Image</h4>
+                <p><img id="base-image" class="disp-images" /><span id="base-info"></span></p>
+            </div>
+            <div class="p-2 bd-highlight">
+                <h4>QR Image</h4>
+                <p><img id="qr-image" class="disp-images"/><span id="qr-info"></span></p>
+            </div>
+        </div>
+        <div class="container-lg  d-flex flex-row justify-content-around ">
+            <button type="button" id="begin-encode" class="btn btn-dark" onclick="encodeHandler(event)">Begin Encoding!</button>
+            <!-- <button type="button" class="btn btn-dark"></button> -->
+        </div>
+        <div class="container-lg flex-column justify-content-around image-div">
+            <div class="p-2 bd-highlight">
+                <h4>Stego-Image</h4>
+                <p><img id="stego-image" class="disp-images" /></p>
+            </div>
+            <button type="button" id="download-btn" class="btn btn-dark" onclick="downloadImage(event)">Download</button>
+        </div>
+
+    </div>
+
+    <!-- <canvas id="myCanvas" width="700" height="400"></canvas> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script src="js/enc/displayImage.js"></script>
+    <script src="js/enc/enc.js"></script>
+</body>
+</html>

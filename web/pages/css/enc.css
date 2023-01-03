@@ -1,0 +1,25 @@
+body {
+  background-color: #F8EDE3;
+  color : #594545
+}
+
+
+div{
+  /* border: 2px salmon solid; */
+  padding: 10px;
+  margin: 5px;
+}
+
+.disp-images{
+  border: 5px salmon solid;
+  /* width:40vw;
+  height:50vh; */
+}
+
+img {
+  height: auto;
+  max-width: 40vw;
+}
+.image-div{
+  text-align: center;
+}

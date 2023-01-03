@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/dec.css">
+    <title>Decode</title>
+</head>
+<body>
+    <div class="container-lg">
+        <form>
+            <!-- <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">Hide Text</label>
+            </div> -->
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Upload the Stego Image</label>
+                <input class="form-control" type="file" id="stegoUpload" accept="image/*"  onchange="loadstego(event)">
+            </div>
+        </form>
+    </div>
+    <div class ="disp-images">
+        <div class="container-lg  d-flex flex-row justify-content-around image-div">
+            <div class="p-2 bd-highlight">
+                <h4>Stego-Image</h4>
+                <p><img id="stego-image" class="disp-images"/></p>
+                <span id="stego-info"></span>
+            </div>
+        </div>
+        <div class="container-lg  d-flex flex-row justify-content-around ">
+            <button type="button" class="btn btn-dark" onclick="decodeHandler(event)">Begin Decoding!</button>
+            <!-- <button type="button" class="btn btn-dark"></button> -->
+        </div>
+        <!-- <div class="container-lg justify-content-around "> -->
+            <div class="container-lg d-flex flex-row justify-content-around ">
+                <div class="p-2 bd-highlight">
+                    <h4>Base Image</h4>
+                    <p><img id="base-image" class="disp-images" /></p>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <h4>Hidden QR Image</h4>
+                    <p><img id="qr-image" class="disp-images" /></p>
+                    <button type="button" id="download-btn" class="btn btn-dark" onclick="downloadImage(event)">Download QR</button>
+                </div>
+            </div>
+        </div>
+    <!-- </div> -->
+    <!-- <button type="button" class="btn btn-dark ">Begin Encoding!</button> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script src="js/dec/displayImage.js"></script>
+    <script src="js/dec/dec.js"></script>
+</body>
+</html>
