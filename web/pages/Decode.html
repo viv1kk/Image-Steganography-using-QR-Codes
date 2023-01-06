@@ -45,10 +45,15 @@
                     <button type="button" id="download-btn" class="btn btn-dark" onclick="downloadImage(event)">Download QR</button>
                 </div>
             </div>
+            <div id="message-area" hidden>
+                <h4>Decoded Message : </h4><span id = "hidden-msg" style="font-size:24px"></span>
+            </div>
         </div>
     <!-- </div> -->
     <!-- <button type="button" class="btn btn-dark ">Begin Encoding!</button> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <!-- <script src="js/dec/qcode-decoder.min.js"></script> -->
+    <script src="js/dec/qrcode.js"></script>
     <script src="js/dec/displayImage.js"></script>
     <script src="js/dec/dec.js"></script>
 </body>

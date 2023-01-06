@@ -41,7 +41,6 @@ function writeInfo(id, data)
     s.innerText = "Resolution : "+data.width+" * "+data.height;
 }
 
-
 function extractSize(stegoData){
     let s = 0;
     let count = 0;
@@ -126,7 +125,30 @@ let decodeHandler = function(event){
 
             baseImage.src = stegoImage;
             qrImage.src = extractHiddenQR(stegoImageObj);
-
+            
+            qrImage.onload = ()=>{
+                let imageData = getImageData(qrImage)
+                var result = new QRCode.Decoder()
+                .setOptions({ canOverwriteImage: false })
+                .decode(imageData.data, imageData.width, imageData.height);
+    
+                if (result)
+                {
+                    document.getElementById("message-area").hidden = false;
+                    let hdtxt = document.getElementById("hidden-msg");
+                    hdtxt.innerText = result.data;
+                    // console.log(result.data)
+                }
+                else
+                    alert("Error Decoding QR!!");
+            }
+            // var qr = new QCodeDecoder();
+            // qr.decodeFromImage(qrImage, function (err, result) {
+            // if (err) throw err;
+            //     let hdtxt = document.getElementById("hidden-msg");
+            //     hdtxt.innerText = result;
+            // // alert(result);
+            // });
         };
     }
 };
