@@ -11,10 +11,16 @@
 <body>
     <div class="container-lg">
         <form>
-            <!-- <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="1" id="checkbox" onclick="switchInputforQR(event)" checked> 
                 <label class="form-check-label" for="defaultCheck1">Hide Text</label>
-            </div> -->
+                <small class="form-text text-muted">&nbsp;&nbsp;(Check if you want to upload QR Image instead of writing and generating QR)</small>
+
+            </div>
+            <div class="mb-3">
+                <label for="Text">Enter Text</label>
+                <input type="text" class="form-control" id="qrText" placeholder="Enter text" onchange = "loadqrimage(event)" disabled>
+            </div>
             <div class="mb-3">
                 <label for="formFile" class="form-label">Upload the Base Image</label>
                 <input class="form-control" type="file" id="baseUpload" accept="image/*"  onchange="loadbaseimage(event)">
@@ -44,13 +50,14 @@
             <div class="p-2 bd-highlight">
                 <h4>Stego-Image</h4>
                 <p><img id="stego-image" class="disp-images" /></p>
+                <!-- <div id="qrcode" style="width:1000px; height:1000px; margin-top:30px;"></div> -->
             </div>
             <button type="button" id="download-btn" class="btn btn-dark" onclick="downloadImage(event)">Download</button>
         </div>
-
     </div>
 
     <!-- <canvas id="myCanvas" width="700" height="400"></canvas> -->
+    <script src="js/enc/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
     <script src="js/enc/displayImage.js"></script>
     <script src="js/enc/enc.js"></script>

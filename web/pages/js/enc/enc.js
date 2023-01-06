@@ -1,16 +1,17 @@
 let baseImageFile = document.getElementById('baseUpload');
 let qrImageFile = document.getElementById('qrUpload');
+let qrText = document.getElementById('qrText');
 let stegoImage = document.getElementById('stego-image');
 
 
 function checkUploads()
 {
-    if(baseImageFile.files.length <= 0 || qrImageFile.files.length <= 0)
+    if(baseImageFile.files.length > 0 && (qrImageFile.files.length > 0 || qrText.value.length > 0))
     {
-        alert("First upload the images dumbass!!!!!!")
-        return false;
+        return true;
     }
-    return true;
+    alert("First upload the images dumbass!!!!!!")
+    return false;
 }
 
 
@@ -33,11 +34,8 @@ function getImageData(image)
     //converting the canvas to image
     // var img = canvas.toDataURL("image/png");
     // stegoImage.src = img
-
     return ImageData;
 }
-
-
 
 // this function makes the qr image pure black and white
 function makeBW(qrData)
@@ -112,10 +110,9 @@ function saveQRRes(baseData, s)
 }
 
 
-
-
 function bothReady(baseData, qrData)
 {
+
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
     
@@ -129,7 +126,6 @@ function bothReady(baseData, qrData)
 
     writeInfo("base-info", baseData)
     writeInfo("qr-info", qrData)
-    
     for(let i = 0; i < baseData.height; i++)
     {
         if(i < qrData.height)
@@ -182,7 +178,6 @@ function bothReady(baseData, qrData)
     
 }
 
-
 let downloadImage = function(event){
     let path = stegoImage.getAttribute('src');
     let fn = getFileName(path);
@@ -196,33 +191,51 @@ let encodeHandler = function(event){
     if (checkUploads()) {
         // storing the images 
         let baseImage = baseImageFile.files[0];
-        let qrImage = qrImageFile.files[0];
-
-        //image src
         baseImage = URL.createObjectURL(baseImage);
-        qrImage = URL.createObjectURL(qrImage);
-
-
         var baseImageObj = new Image();
         baseImageObj.src = baseImage;
-
-        var qrImageObj = new Image();
-        qrImageObj.src = qrImage;
-
-        console.log(baseImageObj)
-
+        
+        //make qr with text
         // draw the 2 images in canvas - it will not be displayed 
-        // var canvas = document.getElementById("myCanvas")
-
-        let baseImageData = {ready : 0}, qrImageData = {ready:0};
-
-        qrImageObj.onload = ()=>{
-            qrImageData.data = getImageData(qrImageObj);
+        
+        let baseImageData = {ready : 0}
+        let qrImageData = {ready:0};
+        let qrImage;
+        var qrImageObj;
+        let ckbox = document.getElementById("checkbox");
+        if(ckbox.checked == false && qrText.value != "")
+        {
+            let img = document.getElementById("qr-image");
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            //setting the size of canvas to image size
+            canvas.width = img.width;
+            canvas.height = img.height;
+            //drawing the image on canvas
+            ctx.drawImage(img, 0, 0);
+            // getting the image pixel data object 
+            let ImageData = ctx.getImageData(0,0, img.width, img.height);
+            console.log(ImageData);
+            qrImageData.data = ImageData;
             qrImageData.ready = 1;
             if(baseImageData.ready == 1)
                 bothReady(baseImageData, qrImageData)
         }
-
+        else
+        {
+            qrImage = qrImageFile.files[0];
+            qrImage = URL.createObjectURL(qrImage);
+            qrImageObj = new Image();
+            qrImageObj.src = qrImage;
+            
+            
+            qrImageObj.onload = ()=>{
+                qrImageData.data = getImageData(qrImageObj);
+                qrImageData.ready = 1;
+                if(baseImageData.ready == 1)
+                    bothReady(baseImageData, qrImageData)
+            }
+        }
         baseImageObj.onload = ()=>{
             baseImageData.data = getImageData(baseImageObj);
             baseImageData.ready = 1;
