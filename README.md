@@ -2,4 +2,4 @@
 5th Semester Mini Project
 
 Deployed on Github Pages 
-https://viv1kk.github.io/Image-inside-Image/web/
+https://viv1kk.github.io/Image-Steganography-using-QR-Codes/web/
